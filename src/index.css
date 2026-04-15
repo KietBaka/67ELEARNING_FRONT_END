@@ -1,0 +1,21 @@
+/* --- RESET CSS CƠ BẢN TÀN CỤC --- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #f4f7f9;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Đảm bảo thẻ gốc (chứa toàn bộ ứng dụng React) chiếm toàn bộ màn hình */
+#root {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}

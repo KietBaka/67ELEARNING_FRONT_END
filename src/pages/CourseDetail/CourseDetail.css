@@ -1,0 +1,128 @@
+.course-detail-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  font-family: 'Inter', sans-serif;
+}
+
+.course-header {
+  border-bottom: 2px solid #e2e8f0;
+  padding-bottom: 20px;
+  margin-bottom: 30px;
+}
+
+.course-header h1 {
+  color: #2F65CE; /* Dùng lại màu xanh của 67ELEARNING */
+  font-size: 32px;
+}
+
+.video-box {
+  background: #000;
+  aspect-ratio: 16 / 9; /* Giữ khung hình chuẩn video */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 16px;
+  color: white;
+  margin-bottom: 30px;
+}
+
+/* Nút quay lại "hết sảy" */
+.btn-back {
+  background: none;
+  border: 1px solid #2F65CE;
+  color: #2F65CE;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-bottom: 20px;
+  transition: 0.3s;
+}
+
+.btn-back:hover {
+  background: #EFF6FF;
+}
+
+/* =========================================
+   CSS CHO MODAL ĐĂNG XUẤT
+   ========================================= */
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5); /* Lớp nền đen mờ */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; /* Đảm bảo modal luôn nổi lên trên cùng */
+}
+
+.modal-content {
+  background: white;
+  padding: 32px;
+  border-radius: 16px;
+  width: 350px;
+  text-align: center;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  /* Thêm một chút animation cho sinh động */
+  animation: popIn 0.2s ease-out forwards;
+}
+
+.modal-content h3 {
+  margin-top: 0;
+  color: #1e293b;
+  font-size: 20px;
+  margin-bottom: 12px;
+}
+
+.modal-content p {
+  color: #64748b;
+  margin-bottom: 24px;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+.btn-cancel {
+  padding: 10px 24px;
+  border: 1px solid #cbd5e1;
+  background: white;
+  color: #475569;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.btn-cancel:hover {
+  background: #f1f5f9;
+}
+
+.btn-confirm-logout {
+  padding: 10px 24px;
+  border: none;
+  background: #ef4444; /* Màu đỏ cảnh báo chuẩn */
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.btn-confirm-logout:hover {
+  background: #dc2626; /* Đỏ đậm hơn khi trỏ chuột */
+}
+
+/* Keyframe cho animation nhảy lên nhẹ nhàng */
+@keyframes popIn {
+  0% { opacity: 0; transform: scale(0.9); }
+  100% { opacity: 1; transform: scale(1); }
+}

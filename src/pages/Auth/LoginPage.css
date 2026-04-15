@@ -1,0 +1,178 @@
+/* --- CÀI ĐẶT CHUNG CHO TRANG ĐĂNG NHẬP --- */
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  width: 100vw;
+  background-color: #f4f7f9; /* Màu nền xám nhạt */
+  font-family: 'Inter', sans-serif;
+  color: #333;
+  margin: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.wrapper {
+  width: 100%;
+  max-width: 420px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* --- HEADER & LOGO --- */
+.logo-box {
+  width: 100%;
+  height: 220px;
+  background: linear-gradient(135deg, #4F7BFF, #48C6B1);
+  border-radius: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 20px;
+  box-shadow: 0 10px 20px rgba(79, 123, 255, 0.2);
+}
+
+.logo-box i {
+  font-size: 130px;
+  color: rgb(255, 255, 255);
+}
+
+.title {
+  color: #ffffff;
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  color: #0a1b3c;
+  font-size: 15px;
+  margin-bottom: 30px;
+}
+
+/* --- KHỐI FORM CARD --- */
+.login-card {
+  background: white;
+  width: 100%;
+  padding: 32px;
+  border-radius: 20px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+}
+
+/* --- INPUT FIELDS --- */
+.input-group {
+  margin-bottom: 24px;
+  text-align: left;
+}
+
+.input-group label {
+  display: block;
+  font-size: 14px;
+  font-weight: 500px;
+  margin-bottom: 8px;
+  color: #111827;
+}
+
+.input-wrapper {
+  position: relative;
+}
+
+.input-wrapper i {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #9CA3AF;
+  font-size: 16px;
+}
+
+.input-wrapper input {
+  width: 100%;
+  padding: 14px 16px 14px 44px; /* Chừa 44px bên trái cho icon không bị đè chữ */
+  border: 1px solid #E5E7EB;
+  border-radius: 12px;
+  font-size: 15px;
+  outline: none;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+.input-wrapper input:focus {
+  border-color: #4F7BFF;
+  box-shadow: 0 0 0 3px rgba(79, 123, 255, 0.1);
+}
+
+/* --- NÚT ĐĂNG NHẬP --- */
+.btn-submit {
+  width: 100%;
+  padding: 16px;
+  background: linear-gradient(to right, #4F7BFF, #48C6B1);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  margin-bottom: 24px;
+}
+
+.btn-submit:hover {
+  box-shadow: 0 8px 20px rgba(79, 123, 255, 0.3);
+  transform: translateY(-1px);
+}
+
+/* --- ĐƯỜNG KẺ NGANG --- */
+.divider {
+  height: 1px;
+  background-color: #F3F4F6;
+  margin-bottom: 20px;
+}
+
+/* --- KHU VỰC DEMO TÀI KHOẢN --- */
+.demo-text {
+  text-align: center;
+  color: #6B7280;
+  font-size: 14px;
+  margin-bottom: 16px;
+}
+
+.demo-buttons {
+  display: flex;
+  gap: 12px;
+}
+
+.btn-demo {
+  flex: 1;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  transition: opacity 0.2s;
+}
+
+.btn-demo:hover {
+  opacity: 0.8;
+}
+
+.btn-student {
+  background-color: #EFF6FF;
+  color: #2F65CE;
+}
+
+.btn-teacher {
+  background-color: #ECFDF5;
+  color: #059669;
+}
