@@ -7,13 +7,15 @@ import Dashboard from './pages/Dashboard/Dashboard';
 import CourseDetail from './pages/CourseDetail/CourseDetail';
 import Profile from './pages/Profile/Profile';
 import DeadlineManager from './pages/DeadlineManager/DeadlineManager';
+import Quiz from './pages/Quiz/Quiz';
+import ResultScreen from "./pages/Quiz/ResultScreen.jsx";
 
-import Quiz from './pages/Quiz/Quiz'
+// Import các trang của Giáo viên
 import LecturerDashboard from "./pages/LecturerDashboard/LecturerDashboard.jsx";
 import CurriculumManager from "./pages/CurriculumManager/CurriculumManager.jsx";
-import QuizManager from "./pages/QuizManager/QuizManager.jsx";
-import ResultScreen from "./pages/Quiz/ResultScreen.jsx";
+import QuizManager from "./pages/QuizManager/QuizManager.jsx"; // Lưu ý: Đảm bảo file [source: 11] của bạn export component khớp với tên này
 import MaterialManager from "./pages/MaterialManager/MaterialManager.jsx";
+
 function App() {
   const { user } = useAuth(); 
 
@@ -28,8 +30,8 @@ function App() {
           <Navigate to={user.role === 'LECTURER' ? '/lecturer-dashboard' : '/dashboard'} />
         ) : <LoginPage />
       } />
-      <Route element={<PrivateRoute><MainLayout /></PrivateRoute>}> {/* Bọc PrivateRoute ở đây */}
-        
+      
+      <Route element={<PrivateRoute><MainLayout /></PrivateRoute>}>
         <Route path="/profile" element={<Profile />} />
 
         {/* --- LUỒNG SINH VIÊN --- */}
@@ -41,10 +43,18 @@ function App() {
 
         {/* --- LUỒNG GIÁO VIÊN --- */}
         <Route path="/lecturer-dashboard" element={<LecturerDashboard />} />
-        <Route path="/teacher/QuizManager/:courseId" element={<QuizManager />} />
-        <Route path="/teacher/CurriculumManager/:courseId" element={<CurriculumManager />} />
-        <Route path="/teacher/MaterialManager/:courseId" element={<MaterialManager />} />        
-        </Route>
+        
+        {/* Route cho tab Curriculum (Hỗ trợ cả click từ Sidebar và click từ Dashboard) */}
+        <Route path="/curriculum-manager" element={<CurriculumManager />} />
+        <Route path="/curriculum-manager/:courseId" element={<CurriculumManager />} />
+        
+        {/* Route cho tab Quiz */}
+        <Route path="/quiz-manager" element={<QuizManager />} />
+        <Route path="/quiz-manager/:courseId" element={<QuizManager />} />
+        
+        {/* Route cho Quản lý tài liệu */}
+        <Route path="/material-manager" element={<MaterialManager />} />
+      </Route>
     </Routes>
   );
 }

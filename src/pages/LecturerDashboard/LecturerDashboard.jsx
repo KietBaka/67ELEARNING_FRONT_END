@@ -62,8 +62,15 @@ const LecturerDashboard = () => {
                                     <button 
                                         className="btn-secondary"
                                         onClick={() => navigate(`/curriculum-manager/${course.id}`)}
+                                        style={{ marginRight: '10px' }}
                                     >
                                         Quản lý nội dung
+                                    </button>
+                                    <button 
+                                        className="btn-secondary"
+                                        onClick={() => navigate(`/quiz-manager/${course.id}`)}
+                                    >
+                                        Ngân hàng Quiz
                                     </button>
                                 </div>
                             </div>
