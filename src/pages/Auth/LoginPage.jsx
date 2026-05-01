@@ -1,20 +1,41 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';// 1. Import useNavigate
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from "../../context/AuthContext";
 import './LoginPage.css';
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
+  
+  // Lấy hàm login từ Context
+  const { login } = useAuth(); 
 
   const handleLogin = (e) => {
     e.preventDefault();
 
+    // Xử lý đăng nhập cho Sinh viên
     if (email === 'student@edu.vn' && password === '123456') {
-      alert("Đăng nhập thành công!");
+      login({ 
+        id: "SV001", 
+        name: "Kiệt", 
+        email: email, 
+        role: "STUDENT" 
+      });
       navigate('/dashboard'); 
-    }
-    else{
+    } 
+    // Xử lý đăng nhập cho Giáo viên
+    else if (email === 'teacher@edu.vn' && password === '123456') {
+      login({ 
+        id: "GV001", 
+        name: "Thầy Bình", 
+        email: email, 
+        role: "LECTURER" 
+      });
+      navigate('/lecturer-dashboard'); 
+    } 
+    // Báo lỗi nếu sai
+    else {
       alert("Sai tài khoản hoặc mật khẩu!");
     }
   };
@@ -28,7 +49,6 @@ const LoginPage = () => {
           <b className="subtitle">Sáu bảy là học hết sảy!</b>
         </div>
         
-
         <div className="login-card">
           <form onSubmit={handleLogin}>
             <div className="input-group">

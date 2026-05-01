@@ -1,45 +1,65 @@
-import React,{useState} from 'react';
+import React, { useState } from 'react';
 import './Dashboard.css';
-import {useNavigate, useParams} from 'react-router-dom';
-
+import { useNavigate } from 'react-router-dom';
+import { useData } from '../../context/DataContext'
 
 const Dashboard = () => {
   const navigate = useNavigate();
-
-  const [showLogoutModal, setShowLogoutModal] = useState(false);
-  const courses = [
-  { id: 'giai-tich', title: 'Giai tich 1', info :'Hoc ve dao ham tich phan'},
-  { id: 'triet-hoc', title: 'Triet hoc Mac-Lenin', info:'Hoc ve the gioi quan'}
-];
-
-const handleConfirmLogout = () =>{
-  navigate('/');
-}
+  
+  // Dữ liệu cho các khóa học chung
+  const { courses, isLoading } = useData();
+  if (isLoading) {
+    return (
+      <div className="dashboard-container" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+        <h2>Đang tải dữ liệu khóa học... ⏳</h2>
+      </div>
+    );
+  }
+  // Dữ liệu cho thanh cuộn bài học trong ngày
+  const ongoingLessons = courses
+    .filter(course => course.todayLesson)
+    .map(course => ({
+      id: course.id,
+      title: `${course.name} - ${course.todayLesson.title}`,
+      startTime: course.todayLesson.start,
+      endTime: course.todayLesson.end,
+      status: course.todayLesson.status,
+      quizzes: 2 // Có thể lấy động nếu bạn thêm vào courseService
+    }));
+  
 
   return (
     <div className="dashboard-container">
-      {/* 1. Thanh bên (Sidebar) */}
-      <aside className="sidebar">
-        <div className="sidebar-logo">67EL</div>
-        <nav>
-          <div className="nav-item active"><i className="fa-solid fa-house"></i> Trang chủ</div>
-          <div className="nav-item"><i className="fa-solid fa-book"></i> Khóa học</div>
-          <div className="nav-item"><i className="fa-solid fa-user"></i> Hồ sơ</div>
-          <div className="nav-item logout" onClick={() => setShowLogoutModal(true)}>
-            <i className="fa-solid fa-right-from-bracket"></i> Đăng xuất
-          </div>
-        </nav>
-
-      </aside>
-
-      {/* 2. Nội dung chính */}
       <main className="main-content">
         <header className="top-header">
           <h2>Chào mừng trở lại, Kiệt! 👋</h2>
-          <div className="user-info">
-            <img src="https://ui-avatars.com/api/?name=Kiet+Vo" alt="avatar" />
-          </div>
         </header>
+
+        {/* --- THANH CUỘN BÀI HỌC --- */}
+        <section className="ongoing-lessons-section">
+          <h3>Bài học hôm nay</h3>
+          <div className="lessons-scroll-container">
+            {ongoingLessons.map(lesson => (
+              <div key={lesson.id} className={`lesson-card-horizontal ${lesson.status === 'Đang diễn ra' ? 'active' : ''}`}>
+                <div className="lesson-time">
+                  <i className="fa-regular fa-clock"></i> {lesson.startTime} - {lesson.endTime}
+                </div>
+                <div className="lesson-details">
+                  <h4>{lesson.title}</h4>
+                  <div className="lesson-meta">
+                    <span className="quiz-count">
+                      <i className="fa-solid fa-list-check"></i> {lesson.quizzes} Quiz
+                    </span>
+                    <span className={`status-badge ${lesson.status === 'Đang diễn ra' ? 'highlight' : ''}`}>
+                      {lesson.status}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+        {/* ------------------------- */}
 
         <section className="stats">
           <div className="stat-card"><h3>12</h3><p>Khóa học đã tham gia</p></div>
@@ -51,39 +71,32 @@ const handleConfirmLogout = () =>{
         <div className="course-grid">
           {courses.map(course => (
             <div key={course.id} className="course-card">
-              <div className="course-banner" style={{ backgroundColor: course.color }}>
+              <div className="course-banner" style={{ backgroundColor: course.color || '#4facfe' }}>
                 <i className="fa-solid fa-code"></i>
               </div>
               <div className="course-info">
-                <h4>{course.title}</h4>
-                <p>Giảng viên: {course.teacher}</p>
+                {/* 1. Đổi course.title thành course.name */}
+                <h4>{course.name}</h4> 
+                
+                {/* 2. Đổi course.teacher thành course.lecturer */}
+                <p>Giảng viên: {course.lecturer || 'Đang cập nhật'}</p> 
+                
                 <div className="course-footer">
-                  <span><i className="fa-solid fa-users"></i> {course.students}</span>
-                  <button className="btn-learn"
-                  onClick = {() => navigate(`/course/${course.id}`)}
-                  >Học tiếp</button>
+                  {/* 3. Lấy số lượng từ block stats */}
+                  <span><i className="fa-solid fa-users"></i> {course.stats?.enrolledStudents || 0}</span>
+                  
+                  <button 
+                    className="btn-learn"
+                    onClick={() => navigate(`/course/${course.id}`)}
+                  >
+                    Học tiếp
+                  </button>
                 </div>
               </div>
             </div>
           ))}
-        </div>
+        </div> 
       </main>
-      {showLogoutModal && (
-      <div className = "modal-overlay">
-        <div className = "modal-content">
-          <h3>Xac nhan DANG XUAT</h3>
-          <p>Ban co cha la muon dang xuat</p>
-          <div className = "modal-buttons">
-            <button className = "btn-cancel" onClick={() => setShowLogoutModal(false)}>
-                  Hủy
-            </button>
-            <button className="btn-confirm-logout" onClick={handleConfirmLogout}>
-              Dang xuat
-            </button>
-          </div>
-        </div>
-      </div>
-      )}
     </div>
   );
 };

@@ -1,3 +1,4 @@
+
 .dashboard-container {
   display: flex;
   min-height: 100vh;
@@ -12,6 +13,39 @@
   padding: 24px;
   display: flex;
   flex-direction: column;
+  /* --- THÊM 3 DÒNG DƯỚI ĐÂY --- */
+  transition: all 0.3s ease-in-out; 
+  white-space: nowrap; /* Giúp chữ không bị xuống hàng khi sidebar thu nhỏ */
+  overflow: hidden;    /* Ẩn nội dung thừa khi bóp nhỏ sidebar */
+}
+
+/* Khi Sidebar đóng, thu độ rộng về 0 */
+.sidebar-closed .sidebar {
+  width: 0;
+  padding-left: 0;
+  padding-right: 0;
+  border-right: none;
+  opacity: 0; /* Làm mờ hẳn đi */
+}
+
+.toggle-btn {
+  background: #2F65CE;
+  color: white;
+  border: none;
+  width: 35px;
+  height: 35px;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  transition: 0.2s;
+  margin-right: 15px; 
+}
+
+.toggle-btn:hover {
+  background: #1e4bb5;
 }
 
 .sidebar-logo {
@@ -30,6 +64,8 @@
   display: flex;
   align-items: center;
   gap: 12px;
+
+  text-decoration: none;/*xoa dau gach chan*/
 }
 
 .nav-item.active {
@@ -111,4 +147,95 @@
   border: none;
   border-radius: 6px;
   cursor: pointer;
+}
+/* --- Style cho phần bài học đang diễn ra --- */
+.ongoing-lessons-section {
+  margin: 20px 0;
+}
+
+.lessons-scroll-container {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto; /* Cho phép cuộn ngang */
+  padding-bottom: 12px;
+  scroll-behavior: smooth;
+}
+
+/* Tùy chỉnh thanh cuộn (scrollbar) cho đẹp hơn */
+.lessons-scroll-container::-webkit-scrollbar {
+  height: 6px;
+}
+.lessons-scroll-container::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+  border-radius: 4px;
+}
+.lessons-scroll-container::-webkit-scrollbar-thumb {
+  background: #c1c1c1; 
+  border-radius: 4px;
+}
+.lessons-scroll-container::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8; 
+}
+
+/* Thẻ bài học */
+.lesson-card-horizontal {
+  min-width: 280px;
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  transition: transform 0.2s ease;
+}
+
+.lesson-card-horizontal:hover {
+  transform: translateY(-2px);
+}
+
+.lesson-card-horizontal.active {
+  border-left: 4px solid #4facfe; /* Nổi bật khóa học đang diễn ra */
+}
+
+.lesson-time {
+  font-size: 0.85rem;
+  color: #666;
+  font-weight: 500;
+}
+
+.lesson-details h4 {
+  margin: 0;
+  font-size: 1.05rem;
+  color: #2c3e50;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; /* Cắt chữ nếu tên quá dài */
+}
+
+.lesson-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 5px;
+}
+
+.quiz-count {
+  font-size: 0.85rem;
+  color: #7f8c8d;
+}
+
+.status-badge {
+  font-size: 0.75rem;
+  padding: 4px 10px;
+  border-radius: 20px;
+  background-color: #f0f3f4;
+  color: #7f8c8d;
+  font-weight: 600;
+}
+
+.status-badge.highlight {
+  background-color: #e1f5fe;
+  color: #0288d1;
 }
